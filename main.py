@@ -46,7 +46,7 @@ def main_menu():
 
 def driver_menu():
     while True:
-        print("\nDRIVER'S MENU")
+        print("DRIVER'S MENU")
         print("Enter:")
         print("1- To view all the drivers")
         print("2- To add a driver")
@@ -62,5 +62,13 @@ def driver_menu():
             break
         else:
             print("Invalid input, please try again")
+
+def view_drivers():
+    if drivers:   #drivers in add_drivers function
+        print("DRIVERS LIST")
+        for driver in drivers:
+            print(driver)
+    else:
+        print("No drivers available.")
 
 
