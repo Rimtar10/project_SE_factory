@@ -29,9 +29,9 @@ class City:
 def main_menu():
     while True:
         print("Hello! Please enter:")
-        print("1. To add a driver")
-        print("2. To add a city")
-        print("3. To exit the system")
+        print("1- To add a driver")
+        print("2- To add a city")
+        print("3- To exit the system")
 
         choice= input("Enter your choice: ")
         if choice == "1":
@@ -40,6 +40,25 @@ def main_menu():
             add_city()
         elif choice == "3":
             print("exiting, Goodbye!")
+            break
+        else:
+            print("Invalid input, please try again")
+
+def driver_menu():
+    while True:
+        print("\nDRIVER'S MENU")
+        print("Enter:")
+        print("1- To view all the drivers")
+        print("2- To add a driver")
+        print("3- To go back to main menu")
+        choice = input("Your choice: ")
+
+        if choice == "1":
+            view_drivers()
+        if choice == "2":
+            add_driver()
+        if choice == "3":
+            print("Going back to main menu...")
             break
         else:
             print("Invalid input, please try again")
