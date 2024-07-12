@@ -25,3 +25,23 @@ class City:
             city_info = city_info[:-2]
             #remove the last comma and space example: "city1, city2"
         return city_info
+    
+def main_menu():
+    while True:
+        print("Hello! Please enter:")
+        print("1. To add a driver")
+        print("2. To add a city")
+        print("3. To exit the system")
+
+        choice= input("Enter your choice: ")
+        if choice == "1":
+            add_driver()
+        elif choice == "2":
+            add_city()
+        elif choice == "3":
+            print("exiting, Goodbye!")
+            break
+        else:
+            print("Invalid input, please try again")
+
+
