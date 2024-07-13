@@ -26,7 +26,7 @@ class City:
             #remove the last comma and space example: "city1, city2"
         return city_info
     
-def main_menu():
+def main_menu(drivers, cities):
     while True:
         print("Hello! Please enter:")
         print("1- To add a driver")
@@ -35,16 +35,16 @@ def main_menu():
 
         choice= input("Enter your choice: ")
         if choice == "1":
-            add_driver()
+            driver_menu(drivers, cities)
         elif choice == "2":
-            add_city()
+            cities_menu(cities)
         elif choice == "3":
             print("exiting, Goodbye!")
             break
         else:
             print("Invalid input, please try again")
 
-def driver_menu():
+def driver_menu(drivers, cities):
     while True:
         print("DRIVER'S MENU")
         print("Enter:")
@@ -54,21 +54,42 @@ def driver_menu():
         choice = input("Your choice: ")
 
         if choice == "1":
-            view_drivers()
+            view_drivers(drivers)
         if choice == "2":
-            add_driver()
+            add_driver(drivers, cities)
         if choice == "3":
             print("Going back to main menu...")
             break
         else:
             print("Invalid input, please try again")
 
-def view_drivers():
-    if drivers:   #drivers in add_drivers function
+def view_drivers(drivers):
+    if drivers:  
         print("DRIVERS LIST")
         for driver in drivers:
             print(driver)
     else:
         print("No drivers available.")
+
+def add_driver(drivers, cities):
+    name = input("Enter the driver's name: ")
+    start_city = input("Enter the driver's start city: ")
+
+    # Check if the start city exists
+    if start_city not in cities:
+        add_city = input(start_city + " go not exist. Do you want to add it? (yes/no): ").strip().lower()
+        if add_city == "yes":
+            cities[start_city] = City(start_city)
+            print(f"{start_city} has been added to the database.")
+        else:
+            print("Cannot add driver without a valid start city.")
+            return
+
+    # Add the driver to the list
+    new_driver = Driver(name, start_city)
+    drivers.append(new_driver)
+    print("Driver " + str(new_driver) + " has been added.")
+
+
 
 
