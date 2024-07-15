@@ -93,7 +93,7 @@ def add_driver(drivers, cities):
 
 def cities_menu(drivers, cities):
     while True:
-        print("CITIES' MENU")
+        print("cities menu")
         print("Enter:")
         print("1- To show all cities")
         print("2- To print neighboring cities")
@@ -114,3 +114,10 @@ def cities_menu(drivers, cities):
             print("Invalid input, please try again")
 
 
+def show_cities(cities):
+    if cities:
+        print("cities list: ")
+        for city in cities.values(): # to iterate over values in the dict without accessing each key
+            print(city)
+    else:
+        print("No cities available.")
