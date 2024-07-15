@@ -37,7 +37,7 @@ def main_menu(drivers, cities):
         if choice == "1":
             driver_menu(drivers, cities)
         elif choice == "2":
-            cities_menu(cities)
+            cities_menu(drivers, cities)
         elif choice == "3":
             print("exiting, Goodbye!")
             break
@@ -77,7 +77,7 @@ def add_driver(drivers, cities):
 
     # Check if the start city exists
     if start_city not in cities:
-        add_city = input(start_city + " go not exist. Do you want to add it? (yes/no): ").strip().lower()
+        add_city = input(start_city + " go not exist. Do you want to add it? (yes/no): ").strip().lower() #strip: remove white spaces from the beginning and end
         if add_city == "yes":
             cities[start_city] = City(start_city)
             print(f"{start_city} has been added to the database.")
@@ -91,5 +91,26 @@ def add_driver(drivers, cities):
     print("Driver " + str(new_driver) + " has been added.")
 
 
+def cities_menu(drivers, cities):
+    while True:
+        print("CITIES' MENU")
+        print("Enter:")
+        print("1- To show all cities")
+        print("2- To print neighboring cities")
+        print("3- To print drivers delivering to a city")
+        print("4- To go back to main menu")
+        choice = input("Your choice: ")
+
+        if choice == "1":
+            show_cities(cities)
+        elif choice == "2":
+            print_neighboring_cities(cities)
+        elif choice == "3":
+            print_drivers_delivering_to_city(drivers, cities)
+        elif choice == "4":
+            print("Going back to main menu...")
+            break
+        else:
+            print("Invalid input, please try again")
 
 
