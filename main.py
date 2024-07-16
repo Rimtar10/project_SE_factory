@@ -141,12 +141,15 @@ def print_neighboring_cities(cities):
 def print_drivers_delivering_to_city(drivers, cities):
     city_name = input("Enter the city name: ")
     if city_name in cities:
+        # empty set to keep track of visited cities
         visited = set()
+        # empty set to keep track of reachable cities
         reachable_cities = set()
+        # list to use as a queue, starting with the given city name
         queue = [city_name]
 
         while queue:
-            current_city = queue.pop(0)
+            current_city = queue.pop(0) # remove and return the first element from a queue
             if current_city not in visited:
                 visited.add(current_city)
                 reachable_cities.add(current_city)
@@ -173,3 +176,21 @@ def print_drivers_delivering_to_city(drivers, cities):
 
     else:
         print("City " + city_name + " not found.")
+
+
+# Initialize the drivers and cities databases
+drivers = []
+cities = {
+    "New York": City("New York"),
+    "Los Angeles": City("Los Angeles"),
+    "Chicago": City("Chicago")
+}
+
+# Add some destinations to the cities for testing purposes
+cities["New York"].add_destination("Los Angeles")
+cities["Los Angeles"].add_destination("Chicago")
+cities["Chicago"].add_destination("New York")
+
+# Run the main menu
+if __name__ == "__main__":
+    main_menu(drivers, cities)
