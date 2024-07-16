@@ -29,8 +29,8 @@ class City:
 def main_menu(drivers, cities):
     while True:
         print("Hello! Please enter:")
-        print("1- To add a driver")
-        print("2- To add a city")
+        print("1- To go to the drivers menu")
+        print("2- To go to the cities menu")
         print("3- To exit the system")
 
         choice= input("Enter your choice: ")
@@ -58,7 +58,7 @@ def driver_menu(drivers, cities):
         if choice == "2":
             add_driver(drivers, cities)
         if choice == "3":
-            print("Going back to main menu...")
+            print("Going back to main menu")
             break
         else:
             print("Invalid input, please try again")
@@ -77,16 +77,28 @@ def add_driver(drivers, cities):
 
     # Check if the start city exists
     if start_city not in cities:
-        add_city = input(start_city + " go not exist. Do you want to add it? (yes/no): ").strip().lower() #strip: remove white spaces from the beginning and end
+        add_city = input(start_city + " do not exist. Do you want to add it? (yes/no): ").strip().lower() #strip: remove white spaces from the beginning and end
         if add_city == "yes":
             cities[start_city] = City(start_city)
-            print(f"{start_city} has been added to the database.")
+            print(start_city + " has been added.")
         else:
             print("Cannot add driver without a valid start city.")
             return
+    while True:
+        destination_city = input("Enter a destination city for " + start_city + " (or 'done' to finish): ")
+        if destination_city.lower() == 'done':
+            break
+        if destination_city not in cities:
+            cities[destination_city] = City(destination_city)
+            print(destination_city + " has been added.")
+        cities[start_city].add_destination(destination_city)
+
+        
+    # Generate a new worker ID
+    worker_id = "ID" + str(len(drivers) + 1).zfill(3) #zfill: fill the string with zeros until it reaches the specified length
 
     # Add the driver to the list
-    new_driver = Driver(name, start_city)
+    new_driver = Driver(worker_id, name, start_city)
     drivers.append(new_driver)
     print("Driver " + str(new_driver) + " has been added.")
 
@@ -159,11 +171,8 @@ def print_drivers_delivering_to_city(drivers, cities):
 
         delivering_drivers = []
 
-        # Loop through each driver in the list of drivers
         for driver in drivers:
-        # Check if the driver's start city is in the set of reachable cities
             if driver.start_city in reachable_cities:
-                # If it is, add the driver to the delivering_drivers list
                 delivering_drivers.append(driver)
 
         if delivering_drivers:
@@ -181,16 +190,15 @@ def print_drivers_delivering_to_city(drivers, cities):
 # Initialize the drivers and cities databases
 drivers = []
 cities = {
-    "New York": City("New York"),
-    "Los Angeles": City("Los Angeles"),
-    "Chicago": City("Chicago")
+    "Beirout": City("Beirout"),
+    "Zahle": City("Zahle"),
+    "Baabda": City("Baabda"),
 }
 
-# Add some destinations to the cities for testing purposes
-cities["New York"].add_destination("Los Angeles")
-cities["Los Angeles"].add_destination("Chicago")
-cities["Chicago"].add_destination("New York")
 
-# Run the main menu
+cities["Beirout"].add_destination("Zahle")
+cities["Zahle"].add_destination("Baabda")
+cities["Baabda"].add_destination("Beirout")
+
 if __name__ == "__main__":
     main_menu(drivers, cities)
