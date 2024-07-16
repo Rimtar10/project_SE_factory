@@ -136,3 +136,40 @@ def print_neighboring_cities(cities):
             print("No neighboring cities found for " + city_name)
     else:
         print("City " + city_name + " not found.")
+
+
+def print_drivers_delivering_to_city(drivers, cities):
+    city_name = input("Enter the city name: ")
+    if city_name in cities:
+        visited = set()
+        reachable_cities = set()
+        queue = [city_name]
+
+        while queue:
+            current_city = queue.pop(0)
+            if current_city not in visited:
+                visited.add(current_city)
+                reachable_cities.add(current_city)
+                for destination in cities[current_city].destinations:
+                    if destination not in visited:
+                        queue.append(destination)
+
+        delivering_drivers = []
+
+        # Loop through each driver in the list of drivers
+        for driver in drivers:
+        # Check if the driver's start city is in the set of reachable cities
+            if driver.start_city in reachable_cities:
+                # If it is, add the driver to the delivering_drivers list
+                delivering_drivers.append(driver)
+
+        if delivering_drivers:
+            print("Drivers delivering to " + city_name + ":")
+            for driver in delivering_drivers:
+                print(driver)
+
+        else:
+            print("No drivers delivering to " + city_name )
+
+    else:
+        print("City " + city_name + " not found.")
