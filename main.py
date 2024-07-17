@@ -64,7 +64,7 @@ def driver_menu(drivers, cities):
             print("Invalid input, please try again")
 
 def view_drivers(drivers):
-    if drivers:  
+    if drivers:  #checks if the list is not empty
         print("DRIVERS LIST")
         for driver in drivers:
             print(driver)
@@ -96,6 +96,7 @@ def add_driver(drivers, cities):
         
     # Generate a new worker ID
     worker_id = "ID" + str(len(drivers) + 1).zfill(3) #zfill: fill the string with zeros until it reaches the specified length
+    # len drivers is the number of drivers in the list
 
     # Add the driver to the list
     new_driver = Driver(worker_id, name, start_city)
@@ -187,7 +188,7 @@ def print_drivers_delivering_to_city(drivers, cities):
         print("City " + city_name + " not found.")
 
 
-# Initialize the drivers and cities databases
+# Initialize the drivers and cities
 drivers = []
 cities = {
     "Beirout": City("Beirout"),
