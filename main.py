@@ -137,10 +137,10 @@ def show_cities(cities):
 
 
 
-def print_neighboring_cities(cities):
+def print_neighboring_cities(cities): # cities is a dictionary
     city_name = input("Enter the city name: ")
     if city_name in cities:
-        city = cities[city_name]
+        city = cities[city_name] #call the city object from the dictionary
         if city.destinations:
             print("Neighboring cities to " + city_name + ":")
             for destination in city.destinations:
@@ -154,13 +154,14 @@ def print_neighboring_cities(cities):
 def print_drivers_delivering_to_city(drivers, cities):
     city_name = input("Enter the city name: ")
     if city_name in cities:
-        # empty set to keep track of visited cities
+        # empty set to keep track of visited cities, make sure the city is processed once
         visited = set()
         # empty set to keep track of reachable cities
         reachable_cities = set()
         # list to use as a queue, starting with the given city name
         queue = [city_name]
-
+        
+        # BFS algorithm to find all reachable cities from the given city
         while queue:
             current_city = queue.pop(0) # remove and return the first element from a queue
             if current_city not in visited:
